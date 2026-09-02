@@ -1,0 +1,134 @@
+.page {
+    max-inline-size: 72rem;
+    margin-inline: auto;
+    padding: 2rem 1.5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+header[tuiHeader] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-side {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 60rem) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+}
+
+.section-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    inline-size: fit-content;
+}
+
+.mono {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+.dim {
+    color: var(--tui-text-secondary);
+}
+
+.cpu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cpu progress {
+    inline-size: 4rem;
+}
+
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.icon-cell {
+    display: inline-flex;
+    padding: 0.5rem;
+    border-radius: var(--tui-radius-m);
+    background: var(--tui-background-neutral-1);
+    cursor: default;
+}
+
+.dialog-body {
+    display: grid;
+    gap: 1rem;
+    min-inline-size: 18rem;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+tui-table-pagination {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+tui-table-pagination .t-pages,
+tui-table-pagination .t-lines {
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+    color: var(--tui-text-secondary);
+}
+
+tui-table-pagination .t-strong {
+    color: var(--tui-text-primary);
+}
+
+tui-table-pagination .t-button_back {
+    order: -1;
+}
+
+.t-steppers {
+    display: inline-flex;
+    flex-direction: column;
+}
