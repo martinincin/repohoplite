@@ -1,0 +1,113 @@
+<div class="page">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Биллинг
+            <span tuiSubtitle>лицевой счёт {{ store.balance() | tuiAmount }} · списание 1 октября</span>
+        </h2>
+    </header>
+
+    <div class="t-grid">
+        <section
+            appearance="outline-grayscale"
+            tuiCardLarge
+            class="t-card"
+        >
+            <h3 tuiTitle>
+                Начисления по месяцам
+                <span tuiSubtitle>тыс ₽, включая текущий прогноз</span>
+            </h3>
+            <tui-axes
+                class="t-chart"
+                [axisXLabels]="months()"
+                [axisYLabels]="axisY()"
+                [horizontalLines]="3"
+            >
+                <tui-bar-chart
+                    size="l"
+                    [max]="chartMax()"
+                    [value]="bars()"
+                />
+            </tui-axes>
+        </section>
+
+        <section
+            appearance="outline-grayscale"
+            tuiCardLarge
+            class="t-card t-account"
+        >
+            <h3 tuiTitle>
+                Лицевой счёт
+                <span tuiSubtitle>списание — 1-е число месяца</span>
+            </h3>
+            <div class="t-balance">
+                {{ store.balance() | tuiAmount }}
+            </div>
+            <dl class="t-facts">
+                <div>
+                    <dt>Прогноз за сентябрь</dt>
+                    <dd>{{ store.monthForecast() | tuiAmount }}</dd>
+                </div>
+                <div>
+                    <dt>Виртуальные машины</dt>
+                    <dd>{{ store.vmCost() | tuiAmount }}</dd>
+                </div>
+                <div>
+                    <dt>Хранилище</dt>
+                    <dd>{{ store.storageCost() | tuiAmount }}</dd>
+                </div>
+                <div>
+                    <dt>Исходящий трафик</dt>
+                    <dd>1 240 ₽</dd>
+                </div>
+            </dl>
+            <button
+                iconStart="@tui.wallet"
+                size="s"
+                tuiButton
+                type="button"
+                (click)="openTopUp()"
+            >
+                Пополнить счёт
+            </button>
+        </section>
+    </div>
+
+    <section
+        appearance="outline-grayscale"
+        tuiCardLarge
+        class="t-card"
+    >
+        <h3 tuiTitle>
+            Операции
+            <span tuiSubtitle>пополнения и начисления за последние месяцы</span>
+        </h3>
+        <table
+            tuiTable
+            class="t-table"
+        >
+            <thead>
+                <tr>
+                    <th tuiTh>Дата</th>
+                    <th tuiTh>Операция</th>
+                    <th tuiTh>Сумма</th>
+                </tr>
+            </thead>
+            <tbody tuiTbody>
+                @for (payment of store.payments(); track payment.id) {
+                    <tr>
+                        <td tuiTd>{{ payment.at | date: 'd MMMM y' }}</td>
+                        <td tuiTd>
+                            <div>{{ payment.description }}</div>
+                            <div class="t-dim mono">{{ payment.id }}</div>
+                        </td>
+                        <td tuiTd>
+                            <span [class.t-negative]="payment.amount < 0">
+                                {{ payment.amount | tuiAmount }}
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>

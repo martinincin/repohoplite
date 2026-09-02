@@ -1,0 +1,175 @@
+<div class="page">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Обзор
+            <span tuiSubtitle>
+                {{ store.currentProject().name }} · {{ store.currentProject().description }} ·
+                {{ store.projectVms().length }} ВМ · прогноз {{ store.monthForecast() | tuiAmount }} в месяц
+            </span>
+        </h2>
+    </header>
+
+    <div class="t-grid">
+        <div class="t-column">
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Потребление по месяцам
+                    <span tuiSubtitle>₽/мес, включая прогноз за сентябрь</span>
+                </h3>
+                <tui-axes
+                    class="t-chart"
+                    [axisXLabels]="months()"
+                    [axisYLabels]="axisY()"
+                    [horizontalLines]="3"
+                >
+                    <tui-bar-chart
+                        size="l"
+                        [max]="chartMax()"
+                        [value]="bars()"
+                    />
+                </tui-axes>
+            </section>
+
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Загрузка CPU · {{ store.busiestVm()?.name }}
+                    <span tuiSubtitle>последние 24 часа, %</span>
+                </h3>
+                <tui-axes
+                    class="t-chart t-chart-line"
+                    [horizontalLines]="4"
+                    [verticalLines]="6"
+                >
+                    <tui-line-chart
+                        [height]="160"
+                        [value]="cpuPoints()"
+                        [width]="640"
+                        [x]="0"
+                        [xStringify]="hourX"
+                        [y]="0"
+                    />
+                </tui-axes>
+            </section>
+
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Самые нагруженные ВМ
+                    <span tuiSubtitle>по CPU, работающие</span>
+                </h3>
+                <div class="t-top">
+                    @for (vm of topVms(); track vm.id) {
+                        <div class="t-top-row">
+                            <span class="t-top-name">{{ vm.name }}</span>
+                            <progress
+                                max="100"
+                                tuiProgressBar
+                                [value]="vm.cpu"
+                            ></progress>
+                            <span class="t-top-value">{{ vm.cpu }}%</span>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+
+        <div class="t-column t-side">
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Лицевой счёт
+                    <span tuiSubtitle>списание — 1 октября</span>
+                </h3>
+                <div class="t-balance">{{ store.balance() | tuiAmount }}</div>
+                <button
+                    iconStart="@tui.wallet"
+                    size="s"
+                    tuiButton
+                    type="button"
+                    (click)="openTopUp()"
+                >
+                    Пополнить
+                </button>
+            </section>
+
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Квоты проекта
+                    <span tuiSubtitle>{{ store.currentProject().name }}</span>
+                </h3>
+                @for (row of quotaRows(); track row.label) {
+                    <div class="t-quota">
+                        <div class="t-quota-head">
+                            <span>{{ row.label }}</span>
+                            <span class="t-dim">{{ row.used | number }} / {{ row.quota | number }}{{ row.unit }}</span>
+                        </div>
+                        <progress
+                            max="100"
+                            tuiProgressBar
+                            [value]="percent(row.used, row.quota)"
+                        ></progress>
+                    </div>
+                }
+            </section>
+
+            <section
+                appearance="outline-grayscale"
+                tuiCardLarge
+                class="t-card"
+            >
+                <h3 tuiTitle>
+                    Последние события
+                    <span tuiSubtitle>подробности — в журнале</span>
+                </h3>
+                <div class="t-events">
+                    @for (event of store.recentEvents(); track event.id) {
+                        <div class="t-event">
+                            <tui-icon
+                                [icon]="
+                                    event.severity === 'error'
+                                        ? '@tui.circle-alert'
+                                        : event.severity === 'warning'
+                                          ? '@tui.info'
+                                          : '@tui.check'
+                                "
+                                [class.t-warn]="event.severity === 'warning'"
+                                [class.t-err]="event.severity === 'error'"
+                            />
+                            <div>
+                                <div>{{ event.action }}</div>
+                                <div class="t-dim t-event-meta">
+                                    <span class="mono">{{ event.target }}</span>
+                                    · {{ event.at | date: 'd MMM, HH:mm' }}
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a
+                    routerLink="/audit"
+                    tuiLink
+                >
+                    Весь журнал
+                </a>
+            </section>
+        </div>
+    </div>
+</div>

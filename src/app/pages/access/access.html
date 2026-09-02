@@ -1,0 +1,118 @@
+<div class="page">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Доступы
+            <span tuiSubtitle>{{ store.users().length }} пользователей в аккаунте</span>
+        </h2>
+        <button
+            iconStart="@tui.plus"
+            size="s"
+            tuiButton
+            type="button"
+            (click)="openInvite()"
+        >
+            Пригласить
+        </button>
+    </header>
+
+    <tui-segmented [(activeItemIndex)]="filterIndex">
+        <button
+            type="button"
+            (click)="filterIndex.set(0)"
+        >
+            Все
+        </button>
+        <button
+            type="button"
+            (click)="filterIndex.set(1)"
+        >
+            Приняли приглашение
+        </button>
+    </tui-segmented>
+
+    <table
+        tuiTable
+        class="t-table"
+    >
+        <thead>
+            <tr>
+                <th tuiTh>Пользователь</th>
+                <th tuiTh>Роль</th>
+                <th tuiTh>Последняя активность</th>
+                <th tuiTh>Статус</th>
+                <th tuiTh>Действия</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody>
+            @for (user of users(); track user.id) {
+                <tr>
+                    <td tuiTd>
+                        <div class="t-user">
+                            <div
+                                [tuiAvatar]="initials(user.name)"
+                                class="t-avatar"
+                            ></div>
+                            <div>
+                                <div class="t-name">{{ user.name }}</div>
+                                <div class="t-dim">{{ user.email }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td tuiTd>
+                        <div
+                            [appearance]="user.role === 'owner' ? 'accent' : 'neutral'"
+                            tuiBadge
+                        >
+                            {{ roleLabels[user.role] }}
+                        </div>
+                    </td>
+                    <td tuiTd>{{ user.lastActiveAt | date: 'd MMM, HH:mm' }}</td>
+                    <td tuiTd>
+                        @if (user.invited) {
+                            <div
+                                appearance="warning"
+                                tuiBadge
+                                tuiStatus
+                            >
+                                Приглашён
+                            </div>
+                        } @else {
+                            <div
+                                appearance="positive"
+                                tuiBadge
+                                tuiStatus
+                            >
+                                Активен
+                            </div>
+                        }
+                    </td>
+                    <td tuiTd>
+                        @if (user.role !== 'owner') {
+                            <button
+                                iconStart="@tui.trash-2"
+                                tuiIconButton
+                                type="button"
+                                title="Отозвать доступ"
+                                (click)="remove(user.id, user.email)"
+                            >
+                                Отозвать доступ {{ user.name }}
+                            </button>
+                        }
+                    </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td
+                        tuiTd
+                        colspan="5"
+                    >
+                        <div class="t-empty">
+                            <tui-icon icon="@tui.users" />
+                            <span>Никто не соответствует фильтру</span>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

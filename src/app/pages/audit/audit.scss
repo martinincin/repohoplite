@@ -1,0 +1,22 @@
+.t-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.t-search {
+    width: 18rem;
+    margin-inline-start: auto;
+}
+
+.t-dim {
+    color: var(--tui-text-secondary);
+}
+
+.t-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+}

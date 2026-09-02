@@ -1,0 +1,56 @@
+.t-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.t-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.t-chart {
+    block-size: 16rem;
+}
+
+.t-balance {
+    font: var(--tui-typography-heading-5);
+    font-size: 1.75rem;
+}
+
+.t-facts {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    dt {
+        color: var(--tui-text-secondary);
+    }
+
+    dd {
+        margin: 0;
+    }
+}
+
+.t-dim {
+    color: var(--tui-text-secondary);
+    font-size: var(--tui-font-size-s);
+}
+
+.t-negative {
+    color: var(--tui-status-negative);
+}
+
+@media (max-width: 60rem) {
+    .t-grid {
+        grid-template-columns: 1fr;
+    }
+}

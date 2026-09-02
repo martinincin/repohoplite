@@ -1,0 +1,216 @@
+<tui-root>
+    <header tuiNavigationHeader>
+        <span tuiNavigationLogo>
+            <tui-icon icon="@tui.terminal" />
+            <span tuiFade>Полюс</span>
+        </span>
+
+        <span tuiNavigationSegments>
+            <button
+                appearance="secondary-grayscale"
+                tuiButton
+                tuiChevron
+                tuiDropdownAuto
+                type="button"
+                [(tuiDropdownOpen)]="projectsOpen"
+                [tuiDropdown]="projects"
+            >
+                Проект: {{ store.currentProject().name }}
+            </button>
+            <ng-template #projects>
+                <tui-data-list>
+                    @for (project of store.projects; track project.id) {
+                        <button
+                            tuiOption
+                            type="button"
+                            (click)="selectProject(project)"
+                        >
+                            <span>{{ project.name }}</span>
+                            <span class="t-dim">{{ project.description }}</span>
+                            @if (project.id === store.project()) {
+                                <tui-icon icon="@tui.check" />
+                            }
+                        </button>
+                    }
+                </tui-data-list>
+            </ng-template>
+        </span>
+
+        <hr />
+
+        <button
+            appearance="secondary-grayscale"
+            iconStart="@tui.wallet"
+            tuiButton
+            type="button"
+            (click)="openTopUp()"
+        >
+            {{ store.balance() | tuiAmount }}
+        </button>
+
+        <button
+            [iconStart]="theme.dark() ? '@tui.sun' : '@tui.moon'"
+            [title]="theme.dark() ? 'Светлая тема' : 'Тёмная тема'"
+            tuiIconButton
+            type="button"
+            (click)="theme.toggle()"
+        >
+            {{ theme.dark() ? 'Светлая тема' : 'Тёмная тема' }}
+        </button>
+
+        <button
+            iconStart="@tui.bell"
+            tuiIconButton
+            tuiChevron
+            tuiDropdownAuto
+            type="button"
+            [(tuiDropdownOpen)]="alertsOpen"
+            [tuiDropdown]="alerts"
+        >
+            Уведомления
+            <tui-badge-notification>{{ store.unreadSignals().length }}</tui-badge-notification>
+        </button>
+        <ng-template #alerts>
+            <div
+                appearance="opaque"
+                class="t-panel"
+                tuiSurface
+            >
+                <h3 class="t-panel-title">Уведомления</h3>
+                @for (event of store.unreadSignals(); track event.id) {
+                    <div class="t-alert-row">
+                        <tui-icon
+                            [icon]="event.severity === 'error' ? '@tui.circle-alert' : '@tui.info'"
+                            [class.t-error]="event.severity === 'error'"
+                        />
+                        <div>
+                            <div>{{ event.action }}</div>
+                            <div class="t-dim t-time">
+                                {{ event.target }} · {{ event.at | date: 'd MMM, HH:mm' }}
+                            </div>
+                        </div>
+                    </div>
+                } @empty {
+                    <div class="t-dim">Нет непрочитанных уведомлений</div>
+                }
+                <a
+                    class="t-panel-link"
+                    routerLink="/audit"
+                    tuiLink
+                    (click)="alertsOpen.set(false)"
+                >
+                    Весь журнал
+                </a>
+            </div>
+        </ng-template>
+
+        <button
+            tuiIconButton
+            tuiChevron
+            tuiDropdownAuto
+            type="button"
+            [(tuiDropdownOpen)]="userOpen"
+            [tuiDropdown]="user"
+        >
+            Аккаунт
+            <div tuiAvatar="МИ"></div>
+        </button>
+        <ng-template #user>
+            <div
+                appearance="opaque"
+                class="t-panel"
+                tuiSurface
+            >
+                <div class="t-user">
+                    <div
+                        tuiAvatar="МИ"
+                        class="t-user-avatar"
+                    ></div>
+                    <div>
+                        <div>Мартин Ильин</div>
+                        <div class="t-dim">martin@remixskill.io</div>
+                    </div>
+                    <div
+                        appearance="neutral"
+                        tuiBadge
+                    >
+                        владелец
+                    </div>
+                </div>
+                <label class="t-switch-row">
+                    Тёмная тема
+                    <input
+                        size="s"
+                        tuiSwitch
+                        type="checkbox"
+                        [ngModel]="theme.dark()"
+                        (ngModelChange)="theme.toggle()"
+                    />
+                </label>
+            </div>
+        </ng-template>
+    </header>
+
+    <div class="t-body">
+        <aside [tuiNavigationAside]="true">
+            <header>
+                <a
+                    iconStart="@tui.layout-dashboard"
+                    routerLink="/"
+                    tuiAsideItem
+                >
+                    Обзор
+                </a>
+            </header>
+
+            <a
+                iconStart="@tui.server"
+                routerLink="/vms"
+                tuiAsideItem
+            >
+                Виртуальные машины
+                <div tuiBadge>{{ store.projectVms().length }}</div>
+            </a>
+
+            <a
+                iconStart="@tui.database"
+                routerLink="/storage"
+                tuiAsideItem
+            >
+                Хранилище
+            </a>
+
+            <a
+                iconStart="@tui.credit-card"
+                routerLink="/billing"
+                tuiAsideItem
+            >
+                Биллинг
+            </a>
+
+            <a
+                iconStart="@tui.users"
+                routerLink="/access"
+                tuiAsideItem
+            >
+                Доступы
+            </a>
+
+            <a
+                iconStart="@tui.scroll-text"
+                routerLink="/audit"
+                tuiAsideItem
+            >
+                Журнал событий
+            </a>
+
+            <footer>
+                <span tuiFade>Полюс · консоль 1.4.2</span>
+            </footer>
+        </aside>
+
+        <main tuiNavigationMain>
+            <router-outlet />
+        </main>
+    </div>
+</tui-root>

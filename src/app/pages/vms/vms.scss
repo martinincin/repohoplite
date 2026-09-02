@@ -1,0 +1,45 @@
+.t-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.t-search {
+    width: 16rem;
+}
+
+.t-region {
+    width: 13rem;
+    margin-inline-start: auto;
+}
+
+.t-table {
+    table-layout: fixed;
+}
+
+.t-name {
+    font-weight: 600;
+}
+
+.t-dim {
+    color: var(--tui-text-secondary);
+    font-size: var(--tui-font-size-s);
+}
+
+.t-cpu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    progress {
+        inline-size: 4rem;
+    }
+}
+
+.t-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+}

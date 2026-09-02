@@ -1,0 +1,102 @@
+<div class="page">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Хранилище
+            <span tuiSubtitle>
+                {{ store.projectBuckets().length }} бакетов · занято {{ usedTotalGb().toLocaleString('ru-RU') }} ГБ
+            </span>
+        </h2>
+        <button
+            iconStart="@tui.plus"
+            size="s"
+            tuiButton
+            type="button"
+            (click)="openCreate()"
+        >
+            Создать бакет
+        </button>
+    </header>
+
+    <div class="t-endpoint">
+        <span class="t-dim">Endpoint</span>
+        <span class="mono">https://s3.ru-msk-1.polus.cloud</span>
+        <span class="t-dim">протокол S3, версии включены</span>
+    </div>
+
+    <table
+        tuiTable
+        class="t-table"
+    >
+        <thead>
+            <tr>
+                <th tuiTh>Имя</th>
+                <th tuiTh>Класс</th>
+                <th tuiTh>Занято</th>
+                <th tuiTh>Цена/ГБ</th>
+                <th tuiTh>Цена/мес</th>
+                <th tuiTh>Действия</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody>
+            @for (bucket of store.projectBuckets(); track bucket.id) {
+                <tr>
+                    <td tuiTd>
+                        <div class="t-name">{{ bucket.name }}</div>
+                        <div class="t-dim mono">{{ bucket.id }}</div>
+                    </td>
+                    <td tuiTd>
+                        <div
+                            appearance="neutral"
+                            tuiBadge
+                        >
+                            {{ typeLabels[bucket.type] }}
+                        </div>
+                    </td>
+                    <td tuiTd>
+                        <div class="t-usage">
+                            <progress
+                                max="100"
+                                tuiProgressBar
+                                [value]="percent(bucket)"
+                            ></progress>
+                            <span class="t-dim">
+                                {{ bucket.usedGb | number }} / {{ bucket.quotaGb | number }} ГБ
+                            </span>
+                        </div>
+                    </td>
+                    <td tuiTd>{{ pricePerGb(bucket) | number: '1.1-1' }} ₽</td>
+                    <td tuiTd>{{ store.bucketMonthlyCost(bucket) | tuiAmount }}</td>
+                    <td tuiTd>
+                        <button
+                            iconStart="@tui.trash-2"
+                            tuiIconButton
+                            type="button"
+                            title="Удалить"
+                            (click)="remove(bucket)"
+                        >
+                            Удалить {{ bucket.name }}
+                        </button>
+                    </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td
+                        tuiTd
+                        colspan="6"
+                    >
+                        <div class="t-empty">
+                            <tui-icon icon="@tui.database" />
+                            <span>В проекте пока нет бакетов</span>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <tui-table-pagination
+        [page]="0"
+        [size]="10"
+        [total]="store.projectBuckets().length"
+    />
+</div>

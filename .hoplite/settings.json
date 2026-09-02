@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "ports": {"preview": 3000, "additional": {}},
+  "scripts": {
+    "setup": {"enabled": true, "command": "npm ci"},
+    "run": {"enabled": true, "command": "npm start -- --host 0.0.0.0 --port 3000"},
+    "archive": {"enabled": true, "command": null},
+    "check": {"enabled": true, "command": "ng build"}
+  },
+  "mcpServers": []
+}
