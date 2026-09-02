@@ -1,0 +1,31 @@
+.t-endpoint {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.t-dim {
+    color: var(--tui-text-secondary);
+    font-size: var(--tui-font-size-s);
+}
+
+.t-cold {
+    opacity: 0.8;
+}
+
+.t-usage {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    progress {
+        inline-size: 4rem;
+    }
+}
+
+.t-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+}

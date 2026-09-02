@@ -1,0 +1,54 @@
+/* Осознанное отклонение от темы Taiga: штатный акцент лежит в сине-индиго
+   диапазоне, характерном для дефолтных сгенерированных интерфейсов.
+   Для инфраструктурной консоли выбран тёмно-бирюзовый — вне этого
+   распределения и не конфликтует со статусными цветами. */
+[tuiTheme='light'],
+:root {
+    --tui-background-accent-1: #0f766e;
+    --tui-background-accent-1-hover: #0d9488;
+    --tui-background-accent-1-pressed: #115e59;
+    --tui-background-accent-2: #b45309;
+    --tui-background-accent-2-hover: #d97706;
+    --tui-background-accent-2-pressed: #92400e;
+    --tui-text-action: #0f766e;
+    --tui-text-action-hover: #0d9488;
+}
+
+[tuiTheme='dark'] {
+    --tui-background-accent-1: #0d9488;
+    --tui-background-accent-1-hover: #14b8a6;
+    --tui-background-accent-1-pressed: #0f766e;
+    --tui-background-accent-2: #f59e0b;
+    --tui-background-accent-2-hover: #fbbf24;
+    --tui-background-accent-2-pressed: #d97706;
+    --tui-text-action: #2dd4bf;
+    --tui-text-action-hover: #5eead4;
+}
+
+/* Идентификаторы, адреса и суммы потребления — моноширинным, как в
+   инженерных консолях. */
+.mono {
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+    font-size: 0.875rem;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overscroll-behavior: none;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    inline-size: 100%;
+    max-inline-size: 84rem;
+    margin-inline: auto;
+    padding: 1.25rem;
+    box-sizing: border-box;
+}

@@ -1,0 +1,100 @@
+<div class="page">
+    <header tuiHeader>
+        <h2 tuiTitle>
+            Журнал событий
+            <span tuiSubtitle>{{ store.events().length }} записей · действия, доступ и биллинг</span>
+        </h2>
+    </header>
+
+    <div class="t-toolbar">
+        <tui-segmented [(activeItemIndex)]="severityIndex">
+            <button
+                type="button"
+                (click)="severityIndex.set(0)"
+            >
+                Все
+            </button>
+            <button
+                type="button"
+                (click)="severityIndex.set(1)"
+            >
+                Предупреждения
+            </button>
+            <button
+                type="button"
+                (click)="severityIndex.set(2)"
+            >
+                Ошибки
+            </button>
+        </tui-segmented>
+
+        <tui-textfield
+            iconStart="@tui.search"
+            class="t-search"
+        >
+            <input
+                placeholder="Событие, объект или инициатор"
+                tuiInput
+                [ngModel]="search()"
+                (ngModelChange)="onSearch($event)"
+            />
+        </tui-textfield>
+    </div>
+
+    <table
+        tuiTable
+        class="t-table"
+    >
+        <thead>
+            <tr>
+                <th tuiTh>Время</th>
+                <th tuiTh>Важность</th>
+                <th tuiTh>Событие</th>
+                <th tuiTh>Объект</th>
+                <th tuiTh>Инициатор</th>
+            </tr>
+        </thead>
+        <tbody tuiTbody>
+            @for (event of paged(); track event.id) {
+                <tr>
+                    <td tuiTd>{{ event.at | date: 'd MMM, HH:mm' }}</td>
+                    <td tuiTd>
+                        <div
+                            [appearance]="appearance(event.severity)"
+                            tuiBadge
+                            tuiStatus
+                        >
+                            {{ label(event.severity) }}
+                        </div>
+                    </td>
+                    <td tuiTd>{{ event.action }}</td>
+                    <td tuiTd>
+                        <span class="mono">{{ event.target }}</span>
+                    </td>
+                    <td tuiTd>
+                        <span class="t-dim">{{ event.actor }}</span>
+                    </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td
+                        tuiTd
+                        colspan="5"
+                    >
+                        <div class="t-empty">
+                            <tui-icon icon="@tui.scroll-text" />
+                            <span>Ничего не найдено</span>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <tui-table-pagination
+        [(page)]="page"
+        [(size)]="pageSize"
+        [total]="filtered().length"
+        (paginationChange)="onPagination($event)"
+    />
+</div>

@@ -1,0 +1,25 @@
+.t-user {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.t-avatar {
+    flex-shrink: 0;
+}
+
+.t-name {
+    font-weight: 600;
+}
+
+.t-dim {
+    color: var(--tui-text-secondary);
+    font-size: var(--tui-font-size-s);
+}
+
+.t-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+}
