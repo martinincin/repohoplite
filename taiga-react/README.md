@@ -51,16 +51,21 @@ setTuiIconsBase('/assets/taiga-ui/icons/');
 3. **Анимации** — из коробки: это CSS-анимации тех же стилевых файлов; классы `tui-enter`/`tui-leave` снимаются по `animationend`, как в Angular-версии.
 4. **Тема** — `TuiThemeProvider` переключает `[tuiTheme]` на `<html>` (светлая/тёмная палитры токенов), состояние хранится в localStorage.
 
-## Компоненты (40)
+## Компоненты (~60)
 
-- **Основа**: `TuiRoot`, `TuiThemeProvider`/`useTuiTheme`, `TuiButton`, `TuiIconButton`, `TuiIcon`, `TuiBadge`, `TuiAvatar`, `TuiChip`, `TuiTitle`/`TuiSubtitle`, `TuiLabel`, `TuiLink`, `TuiError`, `TuiLoader`, `TuiSkeleton`
-- **Формы**: `TuiTextfield` + `TuiInput`, `TuiTextarea` (со счётчиком символов), `TuiInputNumber`, `TuiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiRadio`, `TuiSegmented`, `TuiSlider`
+- **Основа**: `TuiRoot`, `TuiThemeProvider`/`useTuiTheme`, `TuiButton`, `TuiIconButton`, `TuiIcon`, `TuiBadge`, `TuiAvatar`, `TuiAvatarStack`, `TuiChip`, `TuiTitle`/`TuiSubtitle`, `TuiLabel`, `TuiLink`, `TuiError`, `TuiLoader`, `TuiSkeleton`, `TuiStatus`, `TuiBadgeNotification`, `TuiBadgedContent`, `TuiLineClamp`
+- **Формы**: `TuiTextfield` + `TuiInput`, `TuiTextarea` (со счётчиком), `TuiInputNumber`, `TuiSelect`, `TuiComboBox`, `TuiMultiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiRadio`, `TuiSegmented`, `TuiSlider`, `TuiCounter`, `TuiCopy`, `TuiRating`, `TuiFilter`
+- **Календарь**: `TuiCalendar` (+ ISO-хелперы `toIso`/`fromIso`/`formatTuiDate`), `TuiInputDate`
 - **Оверлеи**: `TuiDropdown`, `TuiHint`, `TuiDialogsProvider`/`useTuiDialogs` + `TuiConfirmContent`, `TuiNotificationsProvider`/`useTuiNotifications` + `TuiNotification`
-- **Навигация и структура**: `TuiTabs`/`TuiTab`, `TuiAccordion`/`TuiAccordionItem` (+ `TuiExpand`), `TuiBreadcrumbs`/`TuiBreadcrumbItem`, `TuiPagination`, навигационный шелл `TuiNavigationAside`/`TuiNavigationHeader`/`TuiNavigationMain`/`TuiNavigationNav`/`TuiNavigationLogo`/`TuiAsideItemLink`/`TuiAsideItemButton`/`TuiFade`
-- **Данные и layout**: `TuiTable`/`TuiTh`/`TuiTd` (sticky-колонки)/`TuiTbody`/`TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiBlockStatus`, `TuiDataList`/`TuiOption`/`TuiOptGroup`
-- **Графики**: `TuiAxes`, `TuiBarChart`, `TuiLineChart`, `TuiPieChart`, `TuiRingChart`
+- **Навигация и структура**: `TuiTabs`/`TuiTab`, `TuiAccordion`/`TuiAccordionItem` (+ `TuiExpand`), `TuiBreadcrumbs`/`TuiBreadcrumbItem`, `TuiPagination`, `TuiStepper`/`TuiStep`, `TuiTimeline`/`TuiTimelineItem`, навигационный шелл (`TuiNavigationAside`/`TuiNavigationHeader`/`TuiNavigationMain`/`TuiNavigationNav`/`TuiNavigationLogo`/`TuiAsideItemLink`/`TuiAsideItemButton`/`TuiFade`)
+- **Данные и layout**: `TuiTable`/`TuiTh` (sticky)/`TuiTd` (sticky)/`TuiTbody`/`TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiBlockStatus`, `TuiBlockDetails`, `TuiDataList`/`TuiOption`/`TuiOptGroup`, `TuiList`, `TuiItemGroup`, `TuiForm`, `TuiTiles`/`TuiTile`
+- **Графики**: `TuiAxes`, `TuiBarChart`, `TuiLineChart`, `TuiPieChart`, `TuiRingChart`, `TuiArcChart`, `TuiLegendItem`
 
-Размеры сверены с Angular-версией по вычисленным стилям (кнопки 32/44px, поля 56/44/32px, th 44px / td 60px с теми же паддингами, бейджи, сегменты, пагинация) — совпадают до значения свойств. Клик-тест всех интерактивных элементов демо — 22/22.
+Размеры сверены с Angular-версией по вычисленным стилям; клик-тест всех интерактивных элементов демо — 32/32.
+
+## Осталось (последний прогон)
+
+Датапикеры-варианты (range/month/time), input-phone (маски), mobile-компоненты (`addon-mobile`), редактор (`addon-editor`), «more»-режим breadcrumbs, tree, carousel, drawer, preview, files, input-chip, pin/pincode.
 
 ## Разработка
 
