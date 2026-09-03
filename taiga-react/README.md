@@ -51,16 +51,16 @@ setTuiIconsBase('/assets/taiga-ui/icons/');
 3. **Анимации** — из коробки: это CSS-анимации тех же стилевых файлов; классы `tui-enter`/`tui-leave` снимаются по `animationend`, как в Angular-версии.
 4. **Тема** — `TuiThemeProvider` переключает `[tuiTheme]` на `<html>` (светлая/тёмная палитры токенов), состояние хранится в localStorage.
 
-## Компоненты (37)
+## Компоненты (40)
 
 - **Основа**: `TuiRoot`, `TuiThemeProvider`/`useTuiTheme`, `TuiButton`, `TuiIconButton`, `TuiIcon`, `TuiBadge`, `TuiAvatar`, `TuiChip`, `TuiTitle`/`TuiSubtitle`, `TuiLabel`, `TuiLink`, `TuiError`, `TuiLoader`, `TuiSkeleton`
-- **Формы**: `TuiTextfield` + `TuiInput`, `TuiTextarea`, `TuiInputNumber`, `TuiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiRadio`, `TuiSegmented`
+- **Формы**: `TuiTextfield` + `TuiInput`, `TuiTextarea` (со счётчиком символов), `TuiInputNumber`, `TuiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiRadio`, `TuiSegmented`, `TuiSlider`
 - **Оверлеи**: `TuiDropdown`, `TuiHint`, `TuiDialogsProvider`/`useTuiDialogs` + `TuiConfirmContent`, `TuiNotificationsProvider`/`useTuiNotifications` + `TuiNotification`
 - **Навигация и структура**: `TuiTabs`/`TuiTab`, `TuiAccordion`/`TuiAccordionItem` (+ `TuiExpand`), `TuiBreadcrumbs`/`TuiBreadcrumbItem`, `TuiPagination`, навигационный шелл `TuiNavigationAside`/`TuiNavigationHeader`/`TuiNavigationMain`/`TuiNavigationNav`/`TuiNavigationLogo`/`TuiAsideItemLink`/`TuiAsideItemButton`/`TuiFade`
-- **Данные и layout**: `TuiTable`/`TuiTh`/`TuiTd`/`TuiTbody`/`TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiBlockStatus`, `TuiDataList`/`TuiOption`/`TuiOptGroup`
-- **Графики**: `TuiAxes`, `TuiBarChart`, `TuiLineChart`
+- **Данные и layout**: `TuiTable`/`TuiTh`/`TuiTd` (sticky-колонки)/`TuiTbody`/`TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiBlockStatus`, `TuiDataList`/`TuiOption`/`TuiOptGroup`
+- **Графики**: `TuiAxes`, `TuiBarChart`, `TuiLineChart`, `TuiPieChart`, `TuiRingChart`
 
-Размеры сверены с Angular-версией попиксельно по вычисленным стилям (кнопки 32/44 px, поля 32/44/56 px, th 44 px / td 60 px с теми же паддингами, бейджи, сегменты, пагинация) — совпадают до значения свойств.
+Размеры сверены с Angular-версией по вычисленным стилям (кнопки 32/44px, поля 56/44/32px, th 44px / td 60px с теми же паддингами, бейджи, сегменты, пагинация) — совпадают до значения свойств. Клик-тест всех интерактивных элементов демо — 22/22.
 
 ## Разработка
 
