@@ -1,6 +1,7 @@
 import type {CSSProperties, HTMLAttributes, TableHTMLAttributes, TdHTMLAttributes, ThHTMLAttributes} from 'react';
 
 import {TUI_VERSION} from '../../version';
+import {join} from '../button/TuiButton';
 import {TuiButton} from '../button/TuiButton';
 import {TuiDropdown} from '../dropdown/TuiDropdown';
 import {TuiDataList, TuiOption} from '../data-list/TuiDataList';
@@ -28,17 +29,27 @@ export function TuiTbody({children, ...rest}: HTMLAttributes<HTMLTableSectionEle
     );
 }
 
-export function TuiTh({children, ...rest}: ThHTMLAttributes<HTMLTableCellElement>) {
+export function TuiTh({children, sticky, className, ...rest}: ThHTMLAttributes<HTMLTableCellElement> & {sticky?: boolean}) {
     return (
-        <th tuith="" data-tui-version={TUI_VERSION} {...rest}>
+        <th
+            tuith=""
+            data-tui-version={TUI_VERSION}
+            className={join(sticky && '_sticky', className)}
+            {...rest}
+        >
             {children}
         </th>
     );
 }
 
-export function TuiTd({children, ...rest}: TdHTMLAttributes<HTMLTableCellElement>) {
+export function TuiTd({children, sticky, className, ...rest}: TdHTMLAttributes<HTMLTableCellElement> & {sticky?: boolean}) {
     return (
-        <td tuitd="" data-tui-version={TUI_VERSION} {...rest}>
+        <td
+            tuitd=""
+            data-tui-version={TUI_VERSION}
+            className={join(sticky && '_sticky', className)}
+            {...rest}
+        >
             {children}
         </td>
     );

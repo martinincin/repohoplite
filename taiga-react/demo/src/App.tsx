@@ -38,6 +38,9 @@ import {
     TuiRoot,
     TuiSegmented,
     TuiSelect,
+    TuiPieChart,
+    TuiRingChart,
+    TuiSlider,
     TuiSkeleton,
     TuiSubtitle,
     TuiSurface,
@@ -113,6 +116,7 @@ function Gallery() {
     const [notes, setNotes] = useState('Заметка о сервере');
     const [accordion, setAccordion] = useState(0);
     const [pagerIndex, setPagerIndex] = useState(3);
+    const [cpu, setCpu] = useState(42);
 
     return (
         <div className="page">
@@ -193,7 +197,7 @@ function Gallery() {
                     <TuiTextfield size="m">
                         <TuiLabel>
                             Заметка
-                            <TuiTextarea rows={3} value={notes} onInput={(e) => setNotes(e.currentTarget.value)} />
+                            <TuiTextarea rows={3} maxLength={200} counter value={notes} onInput={(e) => setNotes(e.currentTarget.value)} />
                         </TuiLabel>
                     </TuiTextfield>
 
@@ -364,7 +368,7 @@ function Gallery() {
                     />
                 </Section>
 
-                <Section title="Графики" subtitle="tui-axes + tui-bar-chart / tui-line-chart">
+                <Section title="Графики" subtitle="tui-axes + bar / line / pie / ring">
                     <TuiAxes
                         className="chart chart-bar"
                         axisYLabels={['0', '50', '100']}
@@ -387,6 +391,35 @@ function Gallery() {
                             dots
                         />
                     </TuiAxes>
+                    <span className="row">
+                        <TuiPieChart className="pie" value={[40, 25, 20, 15]} />
+                        <TuiRingChart className="pie" value={[40, 25, 20, 15]}>
+                            <strong>100</strong>
+                            <span className="dim">%</span>
+                        </TuiRingChart>
+                    </span>
+                </Section>
+
+                <Section title="Слайдер и sticky-колонки">
+                    <TuiSlider value={cpu} onValueChange={setCpu} />
+                    <TuiTable>
+                        <thead>
+                            <tr>
+                                <TuiTh sticky>Имя</TuiTh>
+                                <TuiTh>Пресет</TuiTh>
+                                <TuiTh>CPU</TuiTh>
+                            </tr>
+                        </thead>
+                        <TuiTbody>
+                            {VMS.slice(0, 3).map((vm) => (
+                                <tr key={vm.name}>
+                                    <TuiTd sticky className="mono">{vm.name}</TuiTd>
+                                    <TuiTd>{vm.preset}</TuiTd>
+                                    <TuiTd>{vm.cpu}%</TuiTd>
+                                </tr>
+                            ))}
+                        </TuiTbody>
+                    </TuiTable>
                 </Section>
 
                 <Section title="Состояния">

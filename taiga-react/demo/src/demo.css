@@ -175,3 +175,22 @@ tui-table-pagination .t-button_back {
 tui-textfield .t-content {
     position: static;
 }
+
+.pie {
+    inline-size: 8rem;
+    block-size: 8rem;
+    display: inline-block;
+    position: relative;
+}
+
+tui-ring-chart .t-content {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+}
+
+input[tuislider] {
+    inline-size: 14rem;
+}

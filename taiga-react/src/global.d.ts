@@ -50,6 +50,7 @@ declare module 'react' {
         tuinavigationsegments?: string;
         tuiasideitem?: string;
         tuifade?: string;
+        tuislider?: string;
         label?: string;
     }
 
@@ -86,6 +87,8 @@ declare module 'react' {
             'tui-line-chart': TuiElement;
             'tui-bar': TuiElement;
             'portal-slot': TuiElement;
+            'tui-pie-chart': TuiElement;
+            'tui-ring-chart': TuiElement;
         }
     }
 }
