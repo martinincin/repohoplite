@@ -194,3 +194,28 @@ tui-ring-chart .t-content {
 input[tuislider] {
     inline-size: 14rem;
 }
+
+tui-calendar {
+    display: inline-block;
+}
+
+tui-calendar-spin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block-end: 0.5rem;
+}
+
+tui-calendar-spin .t-month {
+    font-weight: 700;
+}
+
+.arc {
+    inline-size: 10rem;
+    block-size: 5rem;
+}
+
+.arc svg {
+    inline-size: 100%;
+    block-size: 100%;
+}

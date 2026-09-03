@@ -1,0 +1,5 @@
+/* Извлечено из @taiga-ui/kit/fesm2022/taiga-ui-kit-components-line-clamp.mjs (@taiga-ui, Apache-2.0). Не редактировать вручную. */
+[tuilineclamp]{position:absolute;box-shadow:var(--tui-shadow-medium);inline-size:min-content;padding:.75rem 1rem;margin-inline-start:calc(-1px - 1rem);margin-block-start:calc(-1px - .75rem);border-radius:var(--tui-radius-l);box-sizing:content-box;border:1px solid var(--tui-border-normal);background:var(--tui-background-base);color:var(--tui-text-primary);overflow-wrap:break-word}[tuilineclamp].tui-enter, [tuilineclamp].tui-leave{animation-name:tuiFade}
+
+[tuilineclamp]{transition-property:max-height;transition-duration:var(--tui-duration, .3s);transition-timing-function:var(--tui-curve-productive-standard);position:relative;display:block;overflow:hidden}[tuilineclamp]._overflown .t-wrapper{-webkit-box-orient:vertical}[tuilineclamp] .t-wrapper{display:-webkit-box;overflow:hidden;overflow-wrap:anywhere}
+

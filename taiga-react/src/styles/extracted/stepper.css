@@ -1,0 +1,5 @@
+/* Извлечено из @taiga-ui/kit/fesm2022/taiga-ui-kit-components-stepper.mjs (@taiga-ui, Apache-2.0). Не редактировать вручную. */
+tui-stepper{scrollbar-width:none;-ms-overflow-style:none;display:flex;scroll-behavior:var(--tui-scroll-behavior);overflow:auto;counter-reset:steps;font:var(--tui-typography-body-m)}tui-stepper::-webkit-scrollbar, tui-stepper::-webkit-scrollbar-thumb{display:none}tui-stepper[data-orientation=vertical]{flex-direction:column}
+
+tui-step{min-inline-size:fit-content}tui-step:hover{background:unset!important}tui-step._active._active:not(:disabled){cursor:unset}tui-step:not(._vertical):first-of-type{padding-inline-start:0}tui-step:not(._vertical):last-of-type{padding-inline-end:0}tui-step._vertical{padding-inline:0;margin-block-end:.5rem}tui-step [tuiAvatar][data-size]:before{transition:none}tui-step [tuiAvatar][data-size]._initials:before{font-weight:400}
+

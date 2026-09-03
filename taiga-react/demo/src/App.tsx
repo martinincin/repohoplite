@@ -56,6 +56,26 @@ import {
     TuiTh,
     TuiTitle,
     TuiTbody,
+    TuiArcChart,
+    TuiAvatarStack,
+    TuiBadgeNotification,
+    TuiBadgedContent,
+    TuiCalendar,
+    TuiComboBox,
+    TuiCopy,
+    TuiCounter,
+    TuiFilter,
+    TuiInputDate,
+    TuiLegendItem,
+    TuiMultiSelect,
+    TuiRating,
+    TuiStatus,
+    TuiStepper,
+    TuiStep,
+    TuiTimeline,
+    TuiTimelineItem,
+    TuiTile,
+    TuiTiles,
     useTuiDialogs,
     useTuiNotifications,
     useTuiTheme,
@@ -117,6 +137,13 @@ function Gallery() {
     const [accordion, setAccordion] = useState(0);
     const [pagerIndex, setPagerIndex] = useState(3);
     const [cpu, setCpu] = useState(42);
+    const [deployDate, setDeployDate] = useState<string | null>(null);
+    const [combo, setCombo] = useState<string | null>(null);
+    const [metrics, setMetrics] = useState<readonly string[]>(['CPU', 'RAM']);
+    const [step, setStep] = useState(1);
+    const [replicas, setReplicas] = useState(3);
+    const [rating, setRating] = useState(4);
+    const [envs, setEnvs] = useState<readonly string[]>(['Прод']);
 
     return (
         <div className="page">
@@ -398,6 +425,55 @@ function Gallery() {
                             <span className="dim">%</span>
                         </TuiRingChart>
                     </span>
+                </Section>
+
+                <Section title="Календарь и расширенные селекты">
+                    <TuiInputDate value={deployDate} onValueChange={setDeployDate} size="m" />
+                    <TuiComboBox items={REGIONS.concat(['ekb-1 · Екатеринбург'])} value={combo} onValueChange={setCombo} placeholder="Регион или город" size="m" />
+                    <TuiMultiSelect items={['CPU', 'RAM', 'Диск', 'Сеть', 'Трафик']} value={metrics} onValueChange={setMetrics} size="m" placeholder="Метрики" />
+                    <TuiCalendar value={deployDate} onValueChange={setDeployDate} />
+                </Section>
+
+                <Section title="Шаги, счётчики, рейтинги">
+                    <TuiStepper activeIndex={step} onActiveIndexChange={setStep}>
+                        <TuiStep index={0} active={step === 0} onClick={() => setStep(0)}>Аккаунт</TuiStep>
+                        <TuiStep index={1} active={step === 1} onClick={() => setStep(1)}>Проект</TuiStep>
+                        <TuiStep index={2} active={step === 2} onClick={() => setStep(2)}>Ресурсы</TuiStep>
+                    </TuiStepper>
+                    <span className="row">
+                        <TuiCounter value={replicas} onValueChange={setReplicas} min={1} max={9} />
+                        <TuiRating value={rating} onValueChange={setRating} />
+                        <TuiCopy text="s3.ru-msk-1.polus.cloud" />
+                        <TuiStatus color="var(--tui-status-positive)">Работает</TuiStatus>
+                        <TuiStatus color="var(--tui-status-negative)">Отключена</TuiStatus>
+                    </span>
+                    <span className="row">
+                        <TuiBadgeNotification>4</TuiBadgeNotification>
+                        <TuiBadgedContent badge={<TuiBadge appearance="negative" size="s">new</TuiBadge>}>
+                            <TuiAvatar content="МИ" size="s" />
+                        </TuiBadgedContent>
+                        <TuiAvatarStack items={[{content: 'МИ'}, {content: 'АК'}, {content: 'ДО'}, {content: 'СЛ'}]} size="s" />
+                    </span>
+                </Section>
+
+                <Section title="Фильтры, тайлы, таймлайн">
+                    <TuiFilter items={['Прод', 'Стейджинг', 'Архив']} value={envs} onValueChange={setEnvs} />
+                    <span className="row">
+                        <TuiLegendItem color="var(--tui-chart-categorical-00)" active onClick={() => {}}>Виртуальные машины</TuiLegendItem>
+                        <TuiLegendItem color="var(--tui-chart-categorical-01)" onClick={() => {}}>Хранилище</TuiLegendItem>
+                        <TuiLegendItem color="var(--tui-chart-categorical-02)" disabled>Трафик</TuiLegendItem>
+                    </span>
+                    <TuiTiles columns={3}>
+                        <TuiTile><TuiCard size="medium">CPU 80%</TuiCard></TuiTile>
+                        <TuiTile><TuiCard size="medium">RAM 62%</TuiCard></TuiTile>
+                        <TuiTile><TuiCard size="medium">Disk 45%</TuiCard></TuiTile>
+                    </TuiTiles>
+                    <TuiTimeline>
+                        <TuiTimelineItem>Создан проект</TuiTimelineItem>
+                        <TuiTimelineItem>Запущена первая ВМ</TuiTimelineItem>
+                        <TuiTimelineItem>Подключён биллинг</TuiTimelineItem>
+                    </TuiTimeline>
+                    <TuiArcChart className="arc" value={[55, 20, 15]} />
                 </Section>
 
                 <Section title="Слайдер и sticky-колонки">

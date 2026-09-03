@@ -51,6 +51,23 @@ declare module 'react' {
         tuiasideitem?: string;
         tuifade?: string;
         tuislider?: string;
+        tuistep?: string;
+        tuicopy?: string;
+        tuistatus?: string;
+        tuirating?: string;
+        tuibadgenotification?: string;
+        tuibadgedcontent?: string;
+        tuibadge?: string;
+        tuifilter?: string;
+        tuilist?: string;
+        tuitemgroup?: string;
+        tuiform?: string;
+        tuiblockdetails?: string;
+        tuiblock?: string;
+        tuilegenditem?: string;
+        tuilineclamp?: string;
+        tuiavatarstack?: string;
+        tuifade2?: string;
         label?: string;
     }
 
@@ -89,6 +106,21 @@ declare module 'react' {
             'portal-slot': TuiElement;
             'tui-pie-chart': TuiElement;
             'tui-ring-chart': TuiElement;
+            'tui-calendar': TuiElement;
+            'tui-calendar-sheet': TuiElement;
+            'tui-calendar-spin': TuiElement;
+            'tui-calendar-year': TuiElement;
+            'tui-stepper': TuiElement;
+            'tui-counter': TuiElement;
+            'tui-rating': TuiElement;
+            'tui-tiles': TuiElement;
+            'tui-tile': TuiElement;
+            'tui-timeline': TuiElement;
+            'tui-timeline-item': TuiElement;
+            'tui-arc-chart': TuiElement;
+            'tui-input-date': TuiElement;
+            'tui-combo-box': TuiElement;
+            'tui-multi-select': TuiElement;
         }
     }
 }

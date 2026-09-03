@@ -31,6 +31,45 @@ export {TuiSegmented, type TuiSegmentedProps} from './components/form/TuiSegment
 export {TuiSkeleton, type TuiSkeletonProps} from './components/display/TuiSkeleton';
 export {TuiSlider, type TuiSliderProps} from './components/form/TuiSlider';
 
+// Календарь и расширенные селекты
+export {TuiCalendar, formatTuiDate, isTuiToday, toIso, fromIso, type TuiDate, type TuiCalendarProps} from './components/calendar/TuiCalendar';
+export {
+    TuiInputDate,
+    TuiComboBox,
+    TuiMultiSelect,
+    type TuiInputDateProps,
+    type TuiComboBoxProps,
+    type TuiMultiSelectProps,
+} from './components/select/TuiSelectExtensions';
+
+// Разное: шаги, счётчики, статусы, рейтинги
+export {
+    TuiStepper,
+    TuiStep,
+    TuiCounter,
+    TuiCopy,
+    TuiStatus,
+    TuiRating,
+    TuiBadgeNotification,
+    TuiBadgedContent,
+    TuiAvatarStack,
+    TuiLegendItem,
+    TuiLineClamp,
+} from './components/misc/TuiMisc';
+
+export {
+    TuiFilter,
+    TuiTiles,
+    TuiTile,
+    TuiTimeline,
+    TuiTimelineItem,
+    TuiArcChart,
+    TuiList,
+    TuiItemGroup,
+    TuiForm,
+    TuiBlockDetails,
+} from './components/misc/TuiMisc2';
+
 // Списки и оверлеи
 export {
     TuiDataList,

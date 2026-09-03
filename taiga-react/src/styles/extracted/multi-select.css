@@ -1,0 +1,5 @@
+/* Извлечено из @taiga-ui/kit/fesm2022/taiga-ui-kit-components-multi-select.mjs (@taiga-ui, Apache-2.0). Не редактировать вручную. */
+:host:before{display:none}.t-label{display:flex;align-items:flex-start;justify-content:space-between;padding:.5rem}.t-label:last-child{display:none}:host-context(tui-data-list[data-size="s"]) .t-label{padding:.1875rem .375rem}:host-context(tui-sheet-dialog) .t-label.t-label{font:var(--tui-typography-heading-h6);padding:.5rem 0}.t-button{font:var(--tui-typography-body-s)}:host-context(tui-data-list[data-size="l"]) .t-button{margin-block-start:.1875rem}
+
+:host[data-size=m] input{margin-inline-start:.25rem}:host-context(tui-dropdown-mobile) [tuiCheckbox],:host-context(tui-sheet-dialog) [tuiCheckbox]{order:100;margin-inline-start:auto}
+
