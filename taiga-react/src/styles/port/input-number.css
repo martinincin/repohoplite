@@ -1,0 +1,13 @@
+/* Степперы числового поля — дополнение порта: в Angular их рисует
+   tui-spin-button поверх поля; здесь — оверлей у правого края,
+   не влияющий на высоту текстового поля. */
+
+tui-textfield .t-steppers {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0.125rem;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+}

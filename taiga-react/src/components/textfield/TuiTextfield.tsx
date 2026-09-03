@@ -1,6 +1,8 @@
 import {
     createContext,
     useContext,
+    useLayoutEffect,
+    useRef,
     useState,
     type CSSProperties,
     type HTMLAttributes,
@@ -19,6 +21,8 @@ type TextfieldContextValue = {
 };
 
 const TextfieldContext = createContext<TextfieldContextValue>({size: 'l'});
+
+export {TextfieldContext};
 
 export type TuiTextfieldProps = HTMLAttributes<HTMLElement> & {
     size?: TuiTextfieldSize;
@@ -46,10 +50,22 @@ export function TuiTextfield({
     ...rest
 }: TuiTextfieldProps) {
     const [focused, setFocused] = useState(false);
+    const hostRef = useRef<HTMLElement | null>(null);
+
+    // начальное состояние ._empty (крестик скрыт у пустого поля, как в Angular)
+    useLayoutEffect(() => {
+        const host = hostRef.current;
+        const input = host?.querySelector('input, textarea');
+
+        if (host && input) {
+            host.classList.toggle('_empty', (input as HTMLInputElement).value === '');
+        }
+    });
 
     return (
         <TextfieldContext.Provider value={{size}}>
             <tui-textfield
+                ref={hostRef}
                 tuiappearance=""
                 tuiicons=""
                 data-tui-version={TUI_VERSION}
@@ -88,7 +104,7 @@ export function TuiTextfield({
 export type TuiInputProps = InputHTMLAttributes<HTMLInputElement>;
 
 /** Инпут — порт [tuiInput], вкладывается в TuiTextfield. */
-export function TuiInput({value, defaultValue, className, ...rest}: TuiInputProps) {
+export function TuiInput({value, defaultValue, className, onInput, ...rest}: TuiInputProps) {
     const {size} = useContext(TextfieldContext);
     const empty = value === '' || value === undefined || value === null;
 
@@ -99,7 +115,23 @@ export function TuiInput({value, defaultValue, className, ...rest}: TuiInputProp
             data-size={size}
             className={join(empty && defaultValue === undefined ? '_empty' : null, className)}
             value={value}
+            onInput={(event) => {
+                syncEmptyClass(event.currentTarget);
+                onInput?.(event);
+            }}
             {...rest}
         />
     );
+}
+
+// Пустое поле прячет крестик очистки: класс ._empty ставится и на инпут,
+// и на контейнер tui-textfield (селектор оригинальных стилей — по хосту).
+function syncEmptyClass(input: HTMLInputElement): void {
+    const field = input.closest('tui-textfield');
+
+    input.classList.toggle('_empty', input.value === '');
+
+    if (field) {
+        field.classList.toggle('_empty', input.value === '');
+    }
 }

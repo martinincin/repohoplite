@@ -15,12 +15,13 @@ declare module 'react' {
         tuiavatar?: string;
         tuititle?: string;
         tuisubtitle?: string;
+        tuiheader?: string;
         tuilabel?: string;
         tuilink?: string;
-        tuiheader?: string;
         tuiinput?: string;
         tuicheckbox?: string;
         tuiswitch?: string;
+        tuiradio?: string;
         tuioption?: string;
         tuicell?: string;
         tuisurface?: string;
@@ -35,6 +36,20 @@ declare module 'react' {
         tuiprogressbar?: string;
         tuialert?: string;
         tuinotification?: string;
+        tuitab?: string;
+        tuiaccordion?: string;
+        tuitextarea?: string;
+        tuichip?: string;
+        tuiskeleton?: string;
+        tuichevron?: string;
+        tuinavigationaside?: string;
+        tuinavigationheader?: string;
+        tuinavigationmain?: string;
+        tuinavigationnav?: string;
+        tuinavigationlogo?: string;
+        tuinavigationsegments?: string;
+        tuiasideitem?: string;
+        tuifade?: string;
         label?: string;
     }
 
@@ -61,6 +76,15 @@ declare module 'react' {
             'tui-table-pagination': TuiElement;
             'tui-segmented': TuiElement;
             'tui-expand': TuiElement;
+            'tui-tabs': TuiElement;
+            'tui-accordion': TuiElement;
+            'tui-breadcrumbs': TuiElement;
+            'tui-block-status': TuiElement;
+            'tui-pagination': TuiElement;
+            'tui-axes': TuiElement;
+            'tui-bar-chart': TuiElement;
+            'tui-line-chart': TuiElement;
+            'tui-bar': TuiElement;
             'portal-slot': TuiElement;
         }
     }

@@ -7,9 +7,14 @@ import {TuiDataList, TuiOption} from '../data-list/TuiDataList';
 import {iconVars} from '../../utils/icons';
 
 /** Таблица — порт [tuiTable]: table/thead/tbody/th/td с теми же атрибутами. */
-export function TuiTable({children, className, ...rest}: TableHTMLAttributes<HTMLTableElement>) {
+export function TuiTable({
+    children,
+    className,
+    size = 'm',
+    ...rest
+}: TableHTMLAttributes<HTMLTableElement> & {size?: 's' | 'm' | 'l'}) {
     return (
-        <table tuitable="" data-tui-version={TUI_VERSION} className={className} {...rest}>
+        <table tuitable="" data-tui-version={TUI_VERSION} data-size={size} className={className} {...rest}>
             {children}
         </table>
     );

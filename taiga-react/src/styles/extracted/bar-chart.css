@@ -1,0 +1,3 @@
+/* Извлечено из @taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-bar-chart.mjs (@taiga-ui, Apache-2.0). Не редактировать вручную. */
+tui-bar-chart{display:flex;flex:1;block-size:100%}.t-wrapper{transition-property:background-color;transition-duration:var(--tui-duration, .3s);transition-timing-function:var(--tui-curve-productive-standard);position:relative;display:flex;flex:1;align-items:flex-end;justify-content:center;block-size:100%}.t-wrapper_hoverable{cursor:pointer}.t-wrapper_hoverable:hover,.t-wrapper_hoverable.t-wrapper_hovered{background-color:#0000000d}.t-container{flex:1}.t-host{position:absolute;inset-inline:50%}.t-set{border-radius:var(--tui-radius-m);pointer-events:none;outline:none}.t-set:focus{box-shadow:0 0 0 2px var(--tui-border-focus)}
+

@@ -76,6 +76,7 @@ export function TuiInputNumber({
                         tabIndex={-1}
                         disabled={disabled || (min !== undefined && value != null && value <= min)}
                         onClick={() => onValueChange?.(clamp((value ?? 0) - step, min, max))}
+                        aria-label="Уменьшить"
                     >
                         Уменьшить
                         <tui-icon tuiicons="" style={{'--t-icon': `url(${tuiIconUrl('@tui.chevron-down')})`} as CSSProperties} />

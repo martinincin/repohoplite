@@ -1,4 +1,4 @@
-import type {HTMLAttributes} from 'react';
+import {useId, type HTMLAttributes} from 'react';
 
 import {TUI_VERSION} from '../../version';
 
@@ -11,7 +11,7 @@ export type TuiSegmentedProps = Omit<HTMLAttributes<HTMLElement>, 'onChange'> & 
     children?: React.ReactNode;
 };
 
-/** Сегментированный переключатель — порт tui-segmented. */
+/** Сегментированный переключатель — порт tui-segmented (CSS anchor-positioning). */
 export function TuiSegmented({
     activeIndex = 0,
     onActiveIndexChange,
@@ -20,8 +20,16 @@ export function TuiSegmented({
     children,
     ...rest
 }: TuiSegmentedProps) {
+    // уникальное имя якоря для «пилюли» активного сегмента (как tuiGenerateId в Angular)
+    const anchor = `--tui-${useId().replace(/[^a-zA-Z0-9-]/g, '')}`;
+
     return (
-        <tui-segmented data-tui-version={TUI_VERSION} data-size={size} {...rest}>
+        <tui-segmented
+            data-tui-version={TUI_VERSION}
+            data-size={size}
+            style={{'--t-anchor': anchor} as React.CSSProperties}
+            {...rest}
+        >
             {items
                 ? items.map((item, index) => (
                       <button
