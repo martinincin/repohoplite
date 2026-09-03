@@ -51,12 +51,16 @@ setTuiIconsBase('/assets/taiga-ui/icons/');
 3. **Анимации** — из коробки: это CSS-анимации тех же стилевых файлов; классы `tui-enter`/`tui-leave` снимаются по `animationend`, как в Angular-версии.
 4. **Тема** — `TuiThemeProvider` переключает `[tuiTheme]` на `<html>` (светлая/тёмная палитры токенов), состояние хранится в localStorage.
 
-## Компоненты
+## Компоненты (37)
 
-- **Основа**: `TuiRoot`, `TuiThemeProvider`/`useTuiTheme`, `TuiButton`, `TuiIconButton`, `TuiIcon`, `TuiBadge`, `TuiAvatar`, `TuiTitle`/`TuiSubtitle`, `TuiLabel`, `TuiLink`, `TuiError`, `TuiLoader`
-- **Формы**: `TuiTextfield` + `TuiInput`, `TuiInputNumber`, `TuiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiSegmented`
+- **Основа**: `TuiRoot`, `TuiThemeProvider`/`useTuiTheme`, `TuiButton`, `TuiIconButton`, `TuiIcon`, `TuiBadge`, `TuiAvatar`, `TuiChip`, `TuiTitle`/`TuiSubtitle`, `TuiLabel`, `TuiLink`, `TuiError`, `TuiLoader`, `TuiSkeleton`
+- **Формы**: `TuiTextfield` + `TuiInput`, `TuiTextarea`, `TuiInputNumber`, `TuiSelect`, `TuiCheckbox`, `TuiSwitch`, `TuiRadio`, `TuiSegmented`
 - **Оверлеи**: `TuiDropdown`, `TuiHint`, `TuiDialogsProvider`/`useTuiDialogs` + `TuiConfirmContent`, `TuiNotificationsProvider`/`useTuiNotifications` + `TuiNotification`
-- **Данные и layout**: `TuiTable`/`TuiTh`/`TuiTd`/`TuiTbody`, `TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiDataList`/`TuiOption`/`TuiOptGroup`
+- **Навигация и структура**: `TuiTabs`/`TuiTab`, `TuiAccordion`/`TuiAccordionItem` (+ `TuiExpand`), `TuiBreadcrumbs`/`TuiBreadcrumbItem`, `TuiPagination`, навигационный шелл `TuiNavigationAside`/`TuiNavigationHeader`/`TuiNavigationMain`/`TuiNavigationNav`/`TuiNavigationLogo`/`TuiAsideItemLink`/`TuiAsideItemButton`/`TuiFade`
+- **Данные и layout**: `TuiTable`/`TuiTh`/`TuiTd`/`TuiTbody`/`TuiTablePagination`, `TuiProgressBar`, `TuiSurface`, `TuiCard`, `TuiHeader`, `TuiCell`, `TuiBlockStatus`, `TuiDataList`/`TuiOption`/`TuiOptGroup`
+- **Графики**: `TuiAxes`, `TuiBarChart`, `TuiLineChart`
+
+Размеры сверены с Angular-версией попиксельно по вычисленным стилям (кнопки 32/44 px, поля 32/44/56 px, th 44 px / td 60 px с теми же паддингами, бейджи, сегменты, пагинация) — совпадают до значения свойств.
 
 ## Разработка
 
@@ -71,7 +75,7 @@ cd demo && npm i && npm run setup:icons && npm run dev   # галерея ком
 
 ## Статус и ограничения
 
-Порт покрывает ядро дизайн-системы. Не перенесено (в порядке очереди): графики (`addon-charts`), мобильные компоненты (`addon-mobile`), редактор (`addon-editor`), календари/датапикеры, слайдеры, табы/аккордеоны, breadcrumbs, sanitizer-логика Angular-версии. Архитектура (портальный реестр, атрибутная разметка, сборка стилей) рассчитана на постепенное расширение тем же паттерном.
+Порт покрывает ядро дизайн-системы (37 компонентов). Не перенесено: календари/датапикеры, слайдеры, мобильные компоненты (`addon-mobile`), редактор (`addon-editor`), pie/ring-диаграммы, sticky-колонки таблиц, счётчик символов textarea, «more»-режим breadcrumbs. Архитектура (портальный реестр, атрибутная разметка, сборка стилей) рассчитана на постепенное расширение тем же паттерном.
 
 ## Лицензия и происхождение
 

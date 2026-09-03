@@ -23,9 +23,12 @@ export {
 
 // Поля ввода
 export {TuiTextfield, TuiInput, type TuiTextfieldProps, type TuiInputProps} from './components/textfield/TuiTextfield';
+export {TuiTextarea, type TuiTextareaProps} from './components/textfield/TuiTextarea';
 export {TuiInputNumber, type TuiInputNumberProps} from './components/input-number/TuiInputNumber';
 export {TuiCheckbox, TuiSwitch, type TuiCheckboxProps} from './components/form/TuiCheckbox';
+export {TuiRadio, TuiChip, type TuiRadioProps, type TuiChipProps} from './components/form/TuiRadio';
 export {TuiSegmented, type TuiSegmentedProps} from './components/form/TuiSegmented';
+export {TuiSkeleton, type TuiSkeletonProps} from './components/display/TuiSkeleton';
 
 // Списки и оверлеи
 export {
@@ -67,6 +70,7 @@ export {
     type TuiCardSize,
     type TuiCellProps,
 } from './components/layout/TuiSurface';
+export {TuiBlockStatus, type TuiBlockStatusProps} from './components/layout/TuiBlockStatus';
 export {
     TuiTable,
     TuiTbody,
@@ -76,3 +80,50 @@ export {
     type TuiTablePaginationProps,
 } from './components/table/TuiTable';
 export {TuiProgressBar} from './components/progress/TuiProgressBar';
+
+// Структура и навигация
+export {TuiTabs, TuiTab, type TuiTabsProps, type TuiTabProps} from './components/tabs/TuiTabs';
+export {TuiExpand, type TuiExpandProps} from './components/expand/TuiExpand';
+export {
+    TuiAccordion,
+    TuiAccordionItem,
+    type TuiAccordionProps,
+    type TuiAccordionItemProps,
+} from './components/accordion/TuiAccordion';
+export {
+    TuiBreadcrumbs,
+    TuiBreadcrumbItem,
+    type TuiBreadcrumbsProps,
+} from './components/breadcrumbs/TuiBreadcrumbs';
+export {TuiPagination, type TuiPaginationProps} from './components/pagination/TuiPagination';
+export {
+    TuiNavigationAside,
+    TuiNavigationHeader,
+    TuiNavigationMain,
+    TuiNavigationNav,
+    TuiNavigationLogo,
+    TuiNavigationSegments,
+    TuiAsideItemLink,
+    TuiAsideItemButton,
+    TuiFade,
+    type TuiNavigationAsideProps,
+    type TuiAsideItemLinkProps,
+    type TuiAsideItemButtonProps,
+} from './components/navigation/TuiNavigation';
+
+// Графики
+export {
+    TuiAxes,
+    TuiBarChart,
+    TuiLineChart,
+    type TuiBarChartProps,
+    type TuiLineChartProps,
+} from './components/charts/TuiCharts';
+
+export type TuiAxesProps = React.HTMLAttributes<HTMLElement> & {
+    axisYLabels?: readonly string[];
+    axisXLabels?: readonly string[];
+    horizontalLines?: number;
+    verticalLines?: number;
+    axisYInset?: boolean;
+};

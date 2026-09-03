@@ -1,8 +1,6 @@
 import type {CSSProperties, HTMLAttributes} from 'react';
 
-import {TUI_VERSION} from '../../version';
-
-/** Прогресс-бар — порт [tuiProgressBar] на нативном <progress>. */
+/** Прогресс-бар — порт [tuiProgressBar] на нативном <progress> (как в Angular). */
 export function TuiProgressBar({
     value = 0,
     max = 100,
@@ -14,7 +12,6 @@ export function TuiProgressBar({
         <progress
             max={max}
             tuiprogressbar=""
-            data-tui-version={TUI_VERSION}
             value={value}
             className={className}
             style={{...(color && {'--tui-progress-color': color})} as CSSProperties}

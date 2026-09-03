@@ -22,12 +22,25 @@ const TARGETS = [
     ['@taiga-ui/core/fesm2022/taiga-ui-core-components-error.mjs', 'error.css', 'tui-error'],
     ['@taiga-ui/core/fesm2022/taiga-ui-core-components-loader.mjs', 'loader.css', 'tui-loader'],
     ['@taiga-ui/core/fesm2022/taiga-ui-core-components-cell.mjs', 'cell.css', null],
+    ['@taiga-ui/core/fesm2022/taiga-ui-core-components-expand.mjs', 'expand.css', 'tui-expand'],
     ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-segmented.mjs', 'segmented.css', null],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-tabs.mjs', 'tabs.css', 'tui-tabs'],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-accordion.mjs', 'accordion.css', null],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-breadcrumbs.mjs', 'breadcrumbs.css', 'tui-breadcrumbs'],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-pagination.mjs', 'pagination.css', 'tui-pagination'],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-components-textarea.mjs', 'textarea.css', null],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-directives-skeleton.mjs', 'skeleton.css', null],
+    ['@taiga-ui/kit/fesm2022/taiga-ui-kit-directives-fade.mjs', 'fade.css', null],
     ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-card.mjs', 'card.css', null],
     ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-surface.mjs', 'surface.css', null],
-    ['@taiga-ui/addon-table/fesm2022/taiga-ui-addon-table-components-table.mjs', 'table.css', null],
+    ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-block-status.mjs', 'block-status.css', null],
+    ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-navigation.mjs', 'navigation.css', 'aside[tuiNavigationAside]'],
+    ['@taiga-ui/addon-table/fesm2022/taiga-ui-addon-table-components-table.mjs', 'table.css', [null, 'th[tuiTh]', 'td[tuiTd]', 'table[tuiTable]', null]],
+    ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-axes.mjs', 'axes.css', 'tui-axes'],
+    ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-bar-chart.mjs', 'bar-chart.css', 'tui-bar-chart'],
+    ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-line-chart.mjs', 'line-chart.css', 'tui-line-chart'],
     ['@taiga-ui/core/fesm2022/taiga-ui-core-portals-alert.mjs', 'alert.css', null],
-    ['@taiga-ui/core/fesm2022/taiga-ui-core-components-notification.mjs', 'notification-host.css', null],
+    ['@taiga-ui/core/fesm2022/taiga-ui-core-components-notification.mjs', 'notification-host.css', '[tuinotification]'],
 ];
 
 function rewriteHost(css, tag) {
@@ -37,6 +50,10 @@ function rewriteHost(css, tag) {
 
     return (
         css
+            // :host(th) / :host(td) — голый тег означает сам компонент
+            .replace(/:host\(([a-z]+)\)/g, (_m, inner) =>
+                inner === tag.split('[')[0] ? tag : `${tag}${inner}`,
+            )
             // :host(.foo) → tag.foo
             .replace(/:host\(([^)]*)\)/g, (_m, inner) => `${tag}${inner.trim()}`)
             // :host-context(.foo) → .foo tag
@@ -100,9 +117,14 @@ for (const [fesm, cssName, tag] of TARGETS) {
         continue;
     }
 
-    const styles = extractStyleStrings(readFileSync(fesmPath, 'utf8'), tag);
+    const styles = extractStyleStrings(readFileSync(fesmPath, 'utf8'), Array.isArray(tag) ? null : tag);
     const header = `/* Извлечено из ${fesm} (@taiga-ui, Apache-2.0). Не редактировать вручную. */\n`;
 
-    writeFileSync(resolve(out, cssName), header + styles.join('\n') + '\n');
+    // массив тегов = пер-блочная перезапись :host (блоки fesm идут в порядке объявления)
+    const rewritten = Array.isArray(tag)
+        ? styles.map((css, index) => rewriteHost(css, tag[index] ?? null))
+        : styles;
+
+    writeFileSync(resolve(out, cssName), header + rewritten.join('\n') + '\n');
     console.log(cssName, '<-', styles.length, 'блок(ов)');
 }

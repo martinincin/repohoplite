@@ -53,7 +53,7 @@ export const TuiButton = forwardRef<HTMLButtonElement, TuiButtonProps>(function 
             style={{...iconVars({start: iconStart, end: iconEnd}), ...style} as CSSProperties}
             {...rest}
         >
-            {loading ? <span className="t-loader">{children}</span> : children}
+            {loading ? <span className="t-loader"><span className="t-text">{children}</span></span> : children}
         </button>
     );
 });

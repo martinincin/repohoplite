@@ -86,6 +86,38 @@ header[tuiHeader] {
     gap: 0.5rem;
 }
 
+.chart {
+    block-size: 12rem;
+}
+
+.chart-bar tui-bar-chart {
+    block-size: 100%;
+}
+
+tui-axes {
+    display: flex;
+}
+
+tui-tabs {
+    inline-size: 100%;
+}
+
+tui-accordion {
+    inline-size: 100%;
+}
+
+tui-breadcrumbs {
+    inline-size: 100%;
+}
+
+tui-block-status {
+    max-inline-size: 24rem;
+}
+
+[tuinotification] {
+    max-inline-size: 24rem;
+}
+
 .icon-cell {
     display: inline-flex;
     padding: 0.5rem;
@@ -129,6 +161,17 @@ tui-table-pagination .t-button_back {
 }
 
 .t-steppers {
+    /* Степперы — оверлей у правого края поля, как tui-spin-button в Angular:
+       не влияют на высоту текстового поля. */
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0.125rem;
     display: inline-flex;
     flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+}
+
+tui-textfield .t-content {
+    position: static;
 }
