@@ -35,6 +35,7 @@ export function TuiOption({value, selected, disabled, className, children, onCli
         <button
             tuioption=""
             type="button"
+            data-tui-version={TUI_VERSION}
             aria-selected={selected}
             disabled={disabled}
             className={className}

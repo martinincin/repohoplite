@@ -86,9 +86,20 @@ export function TuiTextfield({
                         <TuiIconButton
                             appearance="icon"
                             iconStart="@tui.x"
+                            tuibuttonx=""
                             tabIndex={-1}
                             aria-label="Очистить"
-                            onClick={onClear}
+                            onClick={(event) => {
+                                const input = hostRef.current?.querySelector('input, textarea') as HTMLInputElement | null;
+
+                                if (input) {
+                                    input.value = '';
+                                    syncEmptyClass(input);
+                                }
+
+                                onClear?.();
+                                event.currentTarget.blur();
+                            }}
                             style={{'--t-radius': '100%'} as CSSProperties}
                         >
                             Очистить

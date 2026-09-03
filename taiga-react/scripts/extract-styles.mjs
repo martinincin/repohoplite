@@ -35,10 +35,13 @@ const TARGETS = [
     ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-surface.mjs', 'surface.css', null],
     ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-block-status.mjs', 'block-status.css', null],
     ['@taiga-ui/layout/fesm2022/taiga-ui-layout-components-navigation.mjs', 'navigation.css', 'aside[tuiNavigationAside]'],
-    ['@taiga-ui/addon-table/fesm2022/taiga-ui-addon-table-components-table.mjs', 'table.css', [null, 'th[tuiTh]', 'td[tuiTd]', 'table[tuiTable]', null]],
+    ['@taiga-ui/addon-table/fesm2022/taiga-ui-addon-table-components-table.mjs', 'table.css', [null, 'th[tuiTh]', 'td[tuiTd]', 'table[tuiTable]', '[tuiTable]']],
     ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-axes.mjs', 'axes.css', 'tui-axes'],
     ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-bar-chart.mjs', 'bar-chart.css', 'tui-bar-chart'],
     ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-line-chart.mjs', 'line-chart.css', 'tui-line-chart'],
+    ['@taiga-ui/core/fesm2022/taiga-ui-core-components-slider.mjs', 'slider.css', 'input[tuislider]'],
+    ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-pie-chart.mjs', 'pie-chart.css', 'tui-pie-chart'],
+    ['@taiga-ui/addon-charts/fesm2022/taiga-ui-addon-charts-components-ring-chart.mjs', 'ring-chart.css', 'tui-ring-chart'],
     ['@taiga-ui/core/fesm2022/taiga-ui-core-portals-alert.mjs', 'alert.css', null],
     ['@taiga-ui/core/fesm2022/taiga-ui-core-components-notification.mjs', 'notification-host.css', '[tuinotification]'],
 ];
@@ -48,19 +51,44 @@ function rewriteHost(css, tag) {
         return css;
     }
 
-    return (
-        css
-            // :host(th) / :host(td) — голый тег означает сам компонент
-            .replace(/:host\(([a-z]+)\)/g, (_m, inner) =>
-                inner === tag.split('[')[0] ? tag : `${tag}${inner}`,
-            )
-            // :host(.foo) → tag.foo
-            .replace(/:host\(([^)]*)\)/g, (_m, inner) => `${tag}${inner.trim()}`)
-            // :host-context(.foo) → .foo tag
-            .replace(/:host-context\(([^)]*)\)/g, (_m, inner) => `${inner.trim()} ${tag}`)
-            // :host → tag
-            .replace(/:host/g, tag)
-    );
+    const rewritten = css
+        // :host(th) / :host(td) — голый тег означает сам компонент
+        .replace(/:host\(([a-z]+)\)/g, (_m, inner) =>
+            inner === tag.split('[')[0] ? tag : `${tag}${inner}`,
+        )
+        // :host(.foo) → tag.foo
+        .replace(/:host\(([^)]*)\)/g, (_m, inner) => `${tag}${inner.trim()}`)
+        // :host-context(.foo) → .foo tag
+        .replace(/:host-context\(([^)]*)\)/g, (_m, inner) => `${inner.trim()} ${tag}`)
+        // :host → tag
+        .replace(/:host/g, tag);
+
+    return scopeSelectors(rewritten, tag);
+}
+
+// В Angular стили компонента инкапсулированы; в fesm правила классов (`.t-content`)
+// приходят без скоупа. Скоупим каждый селектор под тег компонента, чтобы классы
+// не утекали глобально (например, `.t-content` ring-chart ломал текстфилды).
+// Селекторы, уже содержащие тег (в т.ч. переписанные из :host-context), не трогаем.
+function scopeSelectors(css, tag) {
+    const skip = /^(@|:|html\b|body\b|tui-root\b|\[dir)/;
+
+    return css.replace(/(^|\})([^{}@]+)\{/g, (match, brace, rawSelectors) => {
+        const scoped = rawSelectors
+            .split(',')
+            .map((raw) => raw.trim())
+            .filter(Boolean)
+            .map((selector) => {
+                if (skip.test(selector) || selector.includes(tag)) {
+                    return selector;
+                }
+
+                return `${tag} ${selector}`;
+            })
+            .join(', ');
+
+        return `${brace}${scoped}{`;
+    });
 }
 
 function extractStyleStrings(source, tag) {

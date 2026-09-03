@@ -11,3 +11,13 @@ tui-textfield .t-steppers {
     justify-content: center;
     z-index: 1;
 }
+
+/* Счётчик символов textarea — дополнение порта (в Angular рисует TuiTextareaContent) */
+tui-textfield .t-counter {
+    position: absolute;
+    inset-block-end: 0.375rem;
+    inset-inline-end: 0.75rem;
+    color: var(--tui-text-tertiary);
+    font: var(--tui-typography-body-xs);
+    pointer-events: none;
+}

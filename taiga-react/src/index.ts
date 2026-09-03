@@ -29,6 +29,7 @@ export {TuiCheckbox, TuiSwitch, type TuiCheckboxProps} from './components/form/T
 export {TuiRadio, TuiChip, type TuiRadioProps, type TuiChipProps} from './components/form/TuiRadio';
 export {TuiSegmented, type TuiSegmentedProps} from './components/form/TuiSegmented';
 export {TuiSkeleton, type TuiSkeletonProps} from './components/display/TuiSkeleton';
+export {TuiSlider, type TuiSliderProps} from './components/form/TuiSlider';
 
 // Списки и оверлеи
 export {
@@ -119,6 +120,12 @@ export {
     type TuiBarChartProps,
     type TuiLineChartProps,
 } from './components/charts/TuiCharts';
+export {
+    TuiPieChart,
+    TuiRingChart,
+    type TuiPieChartProps,
+    type TuiRingChartProps,
+} from './components/charts/TuiPieChart';
 
 export type TuiAxesProps = React.HTMLAttributes<HTMLElement> & {
     axisYLabels?: readonly string[];
