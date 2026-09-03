@@ -1,0 +1,46 @@
+/* Слой диалогов — дополнение порта: в Angular backdrop рисует TuiModalService
+   императивно (не через статические стили пакетов). Здесь — статический эквивалент:
+   тот же visual language (размытие фона из dialog.css, плавное появление tuiFade). */
+
+tui-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: rgb(0 0 0 / 0.4);
+    backdrop-filter: blur(0.25rem);
+    animation: tuiFade calc(var(--tui-duration) / 2) both;
+    box-sizing: border-box;
+}
+
+tui-root:has(> tui-popups tui-modal) > .t-root-content {
+    interactivity: inert;
+}
+
+tui-modal[data-block='top'] {
+    place-items: start center;
+}
+
+tui-modal[data-block='bottom'] {
+    place-items: end center;
+}
+
+/* Слои оверлеев: контент страницы не должен перекрывать порталы */
+tui-popups {
+    position: relative;
+    z-index: 3;
+}
+
+tui-dropdown {
+    z-index: 3;
+}
+
+tui-hint {
+    z-index: 4;
+}
+
+tui-modal {
+    z-index: 2;
+}

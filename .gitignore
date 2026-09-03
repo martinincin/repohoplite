@@ -44,3 +44,14 @@ Thumbs.db
 
 # Verification artifacts (screenshots, recordings)
 /.shots
+
+# React-порт: артефакты сборки и демо
+/taiga-react/dist
+/taiga-react/demo/node_modules
+/taiga-react/demo/public/assets
+/taiga-react/.css-build
+
+# Архив песочницы
+/.hoplite/archive
+/taiga-react/node_modules
+/taiga-react/src/styles/entry.less

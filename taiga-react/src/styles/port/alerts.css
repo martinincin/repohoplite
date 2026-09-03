@@ -1,0 +1,36 @@
+/* Контейнер уведомлений — дополнение порта: в Angular хост алертов создаётся
+   императивно. Эквивалент: фиксированный грид справа сверху, элементы [tuiAlert]
+   из оригинальных стилей сами раскладываются по строкам и анимируются. */
+
+tui-alert-host {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    z-index: 3;
+    display: grid;
+    grid-auto-rows: min-content;
+    justify-items: end;
+    padding: 1rem;
+    pointer-events: none;
+    max-inline-size: min(24rem, 100vw - 2rem);
+    box-sizing: border-box;
+}
+
+tui-alert-host > * {
+    pointer-events: auto;
+}
+
+[tuiNotification] {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    box-sizing: border-box;
+}
+
+[tuiNotification] .t-label {
+    font-weight: 700;
+}
+
+[tuiNotification] .t-text {
+    flex: 1;
+}

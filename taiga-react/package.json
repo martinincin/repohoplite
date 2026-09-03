@@ -1,0 +1,51 @@
+{
+  "name": "taiga-ui-react",
+  "version": "0.1.0",
+  "description": "React-порт дизайн-системы Taiga UI: оригинальные токены, стили и DOM-структура — идентичный вид и анимации",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./taiga-ui.css": "./dist/taiga-ui.css",
+    "./taiga-ui-fonts.css": "./dist/taiga-ui-fonts.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "npm run build:css && tsc -p tsconfig.build.json",
+    "build:css": "node scripts/build-styles.mjs",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@taiga-ui/design-tokens": "~0.316.0",
+    "@taiga-ui/icons": "5.22.0",
+    "@taiga-ui/styles": "5.22.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "less": "^4.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
